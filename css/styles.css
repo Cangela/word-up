@@ -42,13 +42,13 @@ main {
 
 .word-submission {
     font-size: 30px;
-    color: orange;
+    color: purple;
     font-weight: normal;
 }
 
 .allowed-letter {
     font-size: 40px;
-    color: orange;
+    color: purple;
 }
 
 .scoreboard-data {
@@ -59,7 +59,7 @@ input {
     text-align: center;
     padding: 1%;
     font-size: 30px;
-    color: grey;
+    color: purple;
 }
 
 input:focus {
@@ -68,5 +68,5 @@ input:focus {
 }
 
 #new-game-button {
-    background-color: grey;
+    background-color: #00ff00;
 }

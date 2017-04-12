@@ -126,6 +126,9 @@ function render() {
     // GAME -------------------------------------
 
     // clear stuff
+    $("#textbox").removeClass("bad-attempt");
+    $("span").remove(".disallowed-letter");
+    $("#textbox").attr("disabled", false);
     $("#allowed-letters").empty();
     $("#word-submissions").empty();
     // TODO 10
@@ -141,7 +144,8 @@ function render() {
 
     // TODO 11
     // Render the word submissions
-
+    var wordSubmission = model.wordSubmissions.map(wordSubmissionChip)
+    $("#word-submissions").append(wordSubmission);
 
     // Set the value of the textbox
     $("#textbox").val(model.currentAttempt);
@@ -160,7 +164,7 @@ function render() {
 
         // TODO 8 -DONE
         // append the red letter chips to the form
-            $("form").append(redLetterChips);
+        $("form").append(redLetterChips);
     }
 
     // if the game is over
@@ -168,7 +172,8 @@ function render() {
     if (gameOver) {
         // TODO 9
         // disable the text box and clear its contents
-
+        $("#textbox").attr("disabled", true);
+        $("#textbox").val("");
     }
 }
 
@@ -231,12 +236,13 @@ function disallowedLetterChip(letter) {
 // ----------------- DOM EVENT HANDLERS -----------------
 
 $(document).ready(function() {
-    // when the new game button is clicked
-    $("#new-game-button").click(function() {
-        // start the game and re-render
-        startGame();
-        render();
-    });
+// when the new game button is clicked
+$("#new-game-button").click(function() {
+    // start the game and re-render
+    startGame();
+    render();
+});
+
 
     // TODO 6 -DONE
     // Add another event handler with a callback function.
