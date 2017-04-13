@@ -81,12 +81,12 @@ function checkIfWordIsReal(word) {
             // let's print the response to the console so we can take a looksie
             console.log(response);
 
-            // TODO 14 -DONE ??
+            // TODO 14 -DONE
             // Replace the 'true' below.
             // If the response contains any results, then the word is legitimate.
             // Otherwise, it is not.
 
-            if (response.results.length > 0) {
+            if (response.results != "") {
                 var theAnswer = true;
             }
 
@@ -96,7 +96,7 @@ function checkIfWordIsReal(word) {
             //console.log(theAnswer);
 
 
-            // TODO 15
+            // TODO 15 -DONE
             // Update the corresponding wordSubmission in the model
             $.each(model.wordSubmissions, function(index, item) {
                 if (item.word == word)  {
@@ -221,15 +221,22 @@ function wordSubmissionChip(wordSubmission) {
     // if we know the status of this word (real word or not), then add a green score or red X
     if (wordSubmission.hasOwnProperty("isRealWord")) {
         var scoreChip = $("<span></span>").text("⟐");
-        // TODO 17
+        // TODO 17 -DONE
         // give the scoreChip appropriate text content
+        if (wordSubmission.isRealWord) {
+           $(scoreChip).text(wordScore(wordSubmission.word)).addClass("tag tag-sm tag-primary");
+       }
 
-        // TODO 18
+       else {
+           $(scoreChip).text("X").addClass("tag tag-sm tag-danger");
+       }
+
+        // TODO 18 -DONE
         // give the scoreChip appropriate css classes
 
         // TODO 16
         // append scoreChip into wordChip
-
+        $(wordChip).append(scoreChip);
     }
 
     return wordChip;
@@ -350,10 +357,10 @@ function wordScore(word) {
     // split the word into a list of letters
     var letters = word.split("");
 
-    // TODO 19
+    // TODO 19 --DONE
     // Replace the empty list below.
     // Map the list of letters into a list of scores, one for each letter.
-    var letterScores = [];
+    var letterScores = $.map(letters, letterScore);
 
     // return the total sum of the letter scores
     return letterScores.reduce(add, 0);
