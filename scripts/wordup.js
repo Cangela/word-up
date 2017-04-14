@@ -51,12 +51,18 @@ function endGame() {
  */
 function addNewWordSubmission(word) {
     // Do we already have a wordSubmission with this word?
-    // TODO 21
+    // TODO 21 -DONE
     // replace the hardcoded 'false' with the real answer
-    var alreadyUsed = false;
+
+    var matchingSubmissions = model.wordSubmissions.filter(function(submission){
+        return submission.word == word;
+    });
+
+    var alreadyUsed = matchingSubmissions.length > 0;
+
 
     // if the word is valid and hasn't already been used, add it
-    if (containsOnlyAllowedLetters(word) && alreadyUsed == false) {
+    if (containsOnlyAllowedLetters(word) && !alreadyUsed) {
         model.wordSubmissions.push({ word: word });
         // and now we must also determine whether this is actually a real word
         checkIfWordIsReal(word);
@@ -382,9 +388,10 @@ function currentScore() {
         }
     });
 
-    // TODO 20
+    // TODO 20 -DONE
     // return the total sum of the word scores
-    return 0;
+
+    return wordScores.reduce(add, 0);
 }
 
 
